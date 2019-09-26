@@ -164,3 +164,105 @@ weather_df %>%
 ![](vis_and_eda_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ## Some extra stuff
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_hex()
+```
+
+    ## Warning: Removed 15 rows containing non-finite values (stat_binhex).
+
+![](vis_and_eda_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+## more kinds of plots
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmax, fill = name)) +
+  geom_histogram()
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_bin).
+
+![](vis_and_eda_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmax, fill = name)) +
+  # to get rid of stacked bars
+  geom_histogram(position = "dodge")
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_bin).
+
+![](vis_and_eda_files/figure-gfm/unnamed-chunk-10-2.png)<!-- -->
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmax, fill = name)) +
+  geom_histogram() +
+  # to get rid of stacked bars
+  facet_grid(~name)
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_bin).
+
+![](vis_and_eda_files/figure-gfm/unnamed-chunk-10-3.png)<!-- -->
+
+## density plots
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmax, fill = name)) +
+  geom_density(alpha = 0.3)
+```
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_density).
+
+![](vis_and_eda_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = name, y = tmax)) +
+  geom_boxplot()
+```
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_boxplot).
+
+![](vis_and_eda_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+``` r
+# violin plots
+# can show if groups are bimodal -- wont show up on boxplots -- from simply stats!
+weather_df %>% 
+  ggplot(aes(x = name, y = tmax)) +
+  geom_violin()
+```
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_ydensity).
+
+![](vis_and_eda_files/figure-gfm/unnamed-chunk-12-2.png)<!-- -->
+
+## Ridge plots
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmax, y = name)) +
+  geom_density_ridges()
+```
+
+    ## Picking joint bandwidth of 1.84
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_density_ridges).
+
+![](vis_and_eda_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+
+Violin and ridge plots are good for comparisons among many groups where
+boxplots wont work as well
